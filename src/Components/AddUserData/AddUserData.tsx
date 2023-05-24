@@ -1,22 +1,23 @@
 import axios from "axios";
 import { useState } from "react";
 
-const AddUserData = () => {
-  const [name, setName] = useState("");
+const AddUserData: React.FC<{ getUserAxios: () => void }> = ({
+  getUserAxios,
+}) => {
+  const [Name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
   const [userId, setUserId] = useState(3);
 
   const getUserData = () => {
     const newUserData = {
-      id: Math.random(),
+      Name,
       email,
       password,
-      date: new Date(),
     };
     axios({
       method: "post",
-      url: "http://localhost:3001/add",
+      url: "http://localhost:3001/addNewUser",
       data: newUserData,
     })
       .then(function (response) {
@@ -29,7 +30,6 @@ const AddUserData = () => {
     setName("");
     setEmail("");
     setPassWord("");
-
   };
   return (
     <>
@@ -44,7 +44,7 @@ const AddUserData = () => {
             placeholder="User Firstname"
             aria-label="User Firstname"
             aria-describedby="basic-addon1"
-            value={name}
+            value={Name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
