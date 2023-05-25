@@ -7,10 +7,11 @@ const AddUserData: React.FC<{ getUserAxios: () => void }> = ({
   const [Name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
-  const [userId, setUserId] = useState(3);
+  const [userId, setUserId] = useState(1);
 
   const getUserData = () => {
     const newUserData = {
+      userId,
       Name,
       email,
       password,
@@ -22,7 +23,9 @@ const AddUserData: React.FC<{ getUserAxios: () => void }> = ({
     })
       .then(function (response) {
         console.log(response);
-        // getUserAxios();
+        setTimeout(() => {
+          getUserAxios();
+        }, 1000);
       })
       .catch(function (error) {
         console.log(error);
@@ -30,6 +33,7 @@ const AddUserData: React.FC<{ getUserAxios: () => void }> = ({
     setName("");
     setEmail("");
     setPassWord("");
+    setUserId(userId + 1);
   };
   return (
     <>

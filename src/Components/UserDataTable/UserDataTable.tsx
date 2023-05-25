@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import UserData from "../UserData/UserData";
+import AddUserData from "../AddUserData/AddUserData";
+import { UserType } from "../store/stype-store";
 
 const UserDataTable = () => {
   const [users, setUsers] = useState([]);
@@ -9,6 +10,7 @@ const UserDataTable = () => {
     axios
       .get("http://localhost:3001/usersData")
       .then((res) => {
+        console.log("Response from axios", res.data);
         const { allUsers } = res.data;
         console.log("allUsers from axios", allUsers);
         setUsers(allUsers);
@@ -17,16 +19,15 @@ const UserDataTable = () => {
         console.log("err from axios", err.message);
       });
   };
-
   useEffect(() => {
     getUserAxios();
   }, []);
 
-  const userMap = users.map((user: any, index) => {
+  const userMap = users?.map((user: UserType) => {
     return (
-      <tr key={user.ID}>
+      <tr key={user.id}>
         <th scope="row">1</th>
-        <td>{user.name}</td>
+        <td>{user.Name}</td>
         <td>{user.password}</td>
         <td>{user.email}</td>
       </tr>
@@ -46,7 +47,7 @@ const UserDataTable = () => {
         </thead>
         <tbody>{userMap}</tbody>
       </table>
-      <UserData getUserAxios={getUserAxios} />
+      <AddUserData getUserAxios={getUserAxios} />
     </>
   );
 };

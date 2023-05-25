@@ -1,4 +1,4 @@
-import AddUserData from "../AddUserData/AddUserData";
+
 import UserDataTable from "../UserDataTable/UserDataTable";
 
 const UserData = () => {
@@ -9,7 +9,6 @@ const UserData = () => {
           <UserDataTable />
         </div>
         <div className="col-lg-4 p-3 p-lg-5 pt-lg-3">
-          <AddUserData  />
         </div>
       </div>
     </div>
