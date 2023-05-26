@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import AddUserData from "../AddUserData/AddUserData";
 import { UserType } from "../store/stype-store";
 
+
 const UserDataTable = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<UserType[]>([]);
 
   const getUserAxios = () => {
     axios
@@ -23,10 +24,10 @@ const UserDataTable = () => {
     getUserAxios();
   }, []);
 
-  const userMap = users?.map((user: UserType) => {
+  const userMap = users.map((user: UserType, index) => {
     return (
-      <tr key={user.id}>
-        <th scope="row">1</th>
+      <tr key={index}>
+        <th scope="row">{index + 1}</th>
         <td>{user.Name}</td>
         <td>{user.password}</td>
         <td>{user.email}</td>
@@ -36,18 +37,22 @@ const UserDataTable = () => {
 
   return (
     <>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Password</th>
-            <th scope="col">E-Mail</th>
-          </tr>
-        </thead>
-        <tbody>{userMap}</tbody>
-      </table>
-      <AddUserData getUserAxios={getUserAxios} />
+      <div className="col-lg-7 p-3 p-lg-5 pt-lg-3 ">
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Password</th>
+              <th scope="col">E-Mail</th>
+            </tr>
+          </thead>
+          <tbody>{userMap}</tbody>
+        </table>
+      </div>
+      <div className="col-lg-4 p-3 p-lg-5 pt-lg-3">
+        <AddUserData getUserAxios={getUserAxios} />
+      </div>
     </>
   );
 };

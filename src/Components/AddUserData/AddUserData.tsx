@@ -11,7 +11,7 @@ const AddUserData: React.FC<{ getUserAxios: () => void }> = ({
 
   const getUserData = () => {
     const newUserData = {
-      userId,
+      id:userId,
       Name,
       email,
       password,
@@ -33,7 +33,7 @@ const AddUserData: React.FC<{ getUserAxios: () => void }> = ({
     setName("");
     setEmail("");
     setPassWord("");
-    setUserId(userId + 1);
+     setUserId((prevUserId) => prevUserId + 1);
   };
   return (
     <>
